@@ -37,7 +37,21 @@ canvas#g{position:absolute;left:0;top:0;touch-action:none}
 #menu{position:absolute;inset:0;background:radial-gradient(#12304d,#02050a);display:flex;z-index:9;overflow:auto;padding:16px;touch-action:manipulation}
 #mi{margin:auto;display:grid;grid-template-areas:'t' 'o' 'a';justify-items:center;gap:16px;width:100%;max-width:760px}
 #mtt{grid-area:t}#mopts{grid-area:o;display:grid;gap:14px;justify-items:center}#mact{grid-area:a;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;max-width:640px}
-#menu h1{font-size:44px;margin:0 0 10px;color:#9fd8ff;text-shadow:0 0 18px #3af;text-align:center}.grp{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}.grp b{width:120px;text-align:right;color:#9bd;font-size:16px}
+.tic{display:block;width:112px;height:112px;margin:0 auto 4px;filter:drop-shadow(0 0 12px #3af) drop-shadow(0 3px 0 #05121f);animation:tip 3s ease-in-out infinite}
+.tic .tr{transform-box:fill-box;transform-origin:center;animation:tir 24s linear infinite}
+@keyframes tir{to{transform:rotate(360deg)}}
+@keyframes tip{50%{filter:drop-shadow(0 0 22px #6cf) drop-shadow(0 3px 0 #05121f)}}
+body.port .tic{width:72px;height:72px}body.short .tic{width:44px;height:44px;margin-bottom:0}
+#tbg{position:fixed;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#mi{position:relative;z-index:1}
+#menu h1{font-size:60px;font-weight:900;letter-spacing:6px;margin:0 0 6px;text-align:center;color:transparent;-webkit-background-clip:text;background-clip:text;background-image:linear-gradient(105deg,transparent 40%,#fffd 50%,transparent 60%),linear-gradient(#fff,#a9dcff 46%,#2c7cc0 54%,#bfe4ff);background-size:250% 100%,100% 100%;background-repeat:no-repeat;filter:drop-shadow(0 0 16px #3af) drop-shadow(0 3px 0 #05121f);animation:tsh 3.6s linear infinite}
+@keyframes tsh{from{background-position:100% 0,0 0}to{background-position:0 0,0 0}}
+.tsub{display:flex;align-items:center;justify-content:center;gap:12px;font-size:12px;letter-spacing:5px;color:#7fb4d8;text-shadow:0 0 8px #28a}
+.tsub i{display:block;width:60px;height:1px;background:linear-gradient(90deg,transparent,#5fa8e0,transparent)}
+#go{background:linear-gradient(#3aa85c,#1f7a3c);box-shadow:0 0 18px #3f8a;animation:gp 2s ease-in-out infinite}
+@keyframes gp{50%{box-shadow:0 0 30px #6fe}}
+.op{background:linear-gradient(#12304a,#0a1b2b)}
+body.port .tsub{font-size:9px;letter-spacing:2px}body.port .tsub i{width:20px}body.short .tsub{display:none}.grp{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}.grp b{width:120px;text-align:right;color:#9bd;font-size:16px}
 .op{background:#0e2233;color:#cfe;border:1px solid #4a6f8a;padding:9px 16px;cursor:pointer;font-size:15px;border-radius:3px}.op:hover{background:#18405e}.op.on{background:#2a6aa0;border-color:#fff;color:#fff}
 #go{flex:1 0 100%;background:#2a8a4a;color:#fff;border:2px solid #8fe;font-size:20px;padding:12px 40px;cursor:pointer;border-radius:4px}#go:hover{background:#38b060}.hint{color:#789;text-align:center;line-height:1.7;font-size:13px}
 @media(max-width:820px){.sm{font-size:11px}.nm{font-size:14px}.hp,.pb{width:150px}#tp{font-size:14px;gap:10px}.qs{width:34px;height:34px}.ic2{width:38px;height:38px}#mid{padding:4px 6px}}
@@ -95,7 +109,7 @@ body.port #pc{bottom:calc(var(--hh) + 10px)}
 <div id="pc"><button id="pcOk">✓ 여기에 건설</button><button id="pcNo">✕ 취소</button></div><div id="rot">📱 가로 모드로 돌려서 플레이하세요</div>
 <div id="hud"><div id="mmw"><canvas id="mm" width="144" height="144"></canvas></div><div id="mid"><div id="info"></div></div><div id="cmd"></div></div>
 <button id="mn" aria-label="메뉴">☰</button><div id="sh2"><div id="shp"><b>메뉴</b></div></div><div id="rp"></div><div id="pz"><span>일시정지 (F10)</span><small id="pzI"></small><button id="pzGo" class="op">▶ 계속하기</button><button id="pzMenu" class="op">☰ 메뉴로</button></div>
-<div id="menu"><div id="mi"><div id="mtt"><h1>미니 스타크래프트</h1></div><div id="mopts"><div class="grp"><b>내 종족</b><span id="mp"></span></div><div class="grp"><b>컴퓨터 종족</b><span id="ma"></span></div><div class="grp"><b>맵</b><span id="mmap"></span></div><div class="grp"><b>컴퓨터 난이도</b><span id="md"></span></div></div>
+<div id="menu"><canvas id="tbg"></canvas><div id="mi"><div id="mtt"><svg class="tic" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="tg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".46" stop-color="#a9dcff"/><stop offset=".54" stop-color="#2c7cc0"/><stop offset="1" stop-color="#bfe4ff"/></linearGradient><radialGradient id="tg2" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3af" stop-opacity=".55"/><stop offset="1" stop-color="#3af" stop-opacity="0"/></radialGradient></defs><circle cx="60" cy="60" r="58" fill="url(#tg2)"/><circle class="tr" cx="60" cy="60" r="54" fill="none" stroke="#5fa8e0" stroke-width="1.5" stroke-dasharray="2 6"/><polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="#0a1b2b" stroke="url(#tg1)" stroke-width="3.5"/><polygon points="60,18 96,39 96,81 60,102 24,81 24,39" fill="none" stroke="#2c7cc0" stroke-width="1" opacity=".7"/><path d="M20,60 L42,46 L50,58 L32,76 Z" fill="url(#tg1)"/><path d="M100,60 L78,46 L70,58 L88,76 Z" fill="url(#tg1)"/><path d="M60,24 L80,66 L60,57 L40,66 Z" fill="url(#tg1)"/><path d="M60,66 L70,86 L60,80 L50,86 Z" fill="#3af"/><circle cx="60" cy="48" r="4" fill="#0a1b2b"/></svg><h1>미니 스타크래프트</h1><div class="tsub"><i></i>MINI STARCRAFT · REAL-TIME STRATEGY<i></i></div></div><div id="mopts"><div class="grp"><b>내 종족</b><span id="mp"></span></div><div class="grp"><b>컴퓨터 종족</b><span id="ma"></span></div><div class="grp"><b>맵</b><span id="mmap"></span></div><div class="grp"><b>컴퓨터 난이도</b><span id="md"></span></div></div>
 <div id="mact"><button id="go">게임 시작</button><button id="bRot" class="op rotb">🔄 화면 회전</button><button id="bFs" class="op fsb">⛶ 전체화면</button><div class="hint">랜덤을 고르면 시작할 때 종족이 무작위로 정해집니다.<br>테란: 마린·메딕·벌처·시즈 탱크 / 저그: 저글링·히드라리스크·러커 / 프로토스: 질럿·드라군·리버<br>모바일: 한 손가락 드래그=화면 이동 · 탭=선택/명령 · 길게 누르고 드래그=박스 선택 · 두 손가락=확대/축소 · 같은 유닛 빠르게 두 번 탭=화면 안 같은 유닛 전체 선택 · 미니맵 탭=화면 이동 (세로·가로 모두 지원)</div></div></div></div>
 </div>
 <script>
@@ -883,4 +897,15 @@ $('pzGo').onpointerdown=e=>{e.preventDefault();paused=0};
 $('pzMenu').onpointerdown=e=>{e.preventDefault();paused=0;goMenu()};
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&started&&!over)paused=1});
 onresize();menuInit();requestAnimationFrame(loop);
+const tbC=$('tbg'),tbX=tbC.getContext('2d'),mnE=$('menu'),SN=150,stx=new Float32Array(SN),sty=new Float32Array(SN),stz=new Float32Array(SN),stv=new Float32Array(SN),shs={on:0,x:0,y:0,l:0,v:0};
+let tbW=0,tbH=0,tbL=0;
+function tbRes(){tbW=tbC.width=innerWidth;tbH=tbC.height=innerHeight;for(let i=0;i<SN;i++){stx[i]=Math.random()*tbW;sty[i]=Math.random()*tbH;stz[i]=Math.random()*1.6+.5;stv[i]=stz[i]*9}}
+function tbLoop(t){requestAnimationFrame(tbLoop);if(mnE.style.display==='none')return;const dt=Math.min(.05,(t-tbL)/1000||0);tbL=t;
+ tbX.clearRect(0,0,tbW,tbH);tbX.fillStyle='#cfe8ff';
+ for(let i=0;i<SN;i++){stx[i]+=stv[i]*dt;sty[i]+=stv[i]*dt*.35;if(stx[i]>tbW)stx[i]=0;if(sty[i]>tbH)sty[i]=0;tbX.globalAlpha=.35+.55*Math.abs(Math.sin(t/700+i));tbX.fillRect(stx[i],sty[i],stz[i],stz[i])}
+ if(!shs.on&&Math.random()<.006){shs.on=1;shs.x=Math.random()*tbW*.7;shs.y=Math.random()*tbH*.4;shs.l=0;shs.v=700+Math.random()*400}
+ if(shs.on){shs.l+=shs.v*dt;const ex=shs.x+shs.l*.88,ey=shs.y+shs.l*.47;tbX.globalAlpha=Math.max(0,1-shs.l/420);tbX.strokeStyle='#9fd8ff';tbX.lineWidth=2;tbX.beginPath();tbX.moveTo(ex-90,ey-48);tbX.lineTo(ex,ey);tbX.stroke();if(shs.l>420)shs.on=0}
+ tbX.globalAlpha=1}
+tbRes();addEventListener('resize',tbRes);requestAnimationFrame(tbLoop);
+
 </script></body></html>
