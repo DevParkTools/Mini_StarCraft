@@ -187,7 +187,7 @@ body.port .hr .sm{white-space:nowrap;font-size:10px}body.port .hr.pr .sm{display
 .ldl{text-align:center;font-size:14px;color:#cfe8ff;min-height:20px}.ldtip{text-align:center;font-size:13px;color:#fc6;background:#0a1a2c99;border:1px solid #1f4a72;padding:10px 14px;border-radius:3px;line-height:1.6}
 @media(max-width:820px){.mapw,.roomw{grid-template-columns:1fr}.mlist,.rleft{border-right:0;border-bottom:1px solid #1f4a72}.mrows{max-height:150px}.mpv canvas{max-width:150px}.ldm{flex-direction:column}.ldm canvas{width:130px;height:130px}.ldn{font-size:22px}.sh2,.slot{grid-template-columns:1.1fr 1.4fr 1.1fr .8fr;gap:5px;font-size:12px}.ph{font-size:16px}.rlog{height:70px}}
 body.short .mpv canvas{max-width:120px}body.short .mrows{max-height:110px}body.short .rlog{height:54px}body.short .ph{padding:6px 12px;font-size:15px}body.short .mapw,body.short .roomw{grid-template-columns:1.5fr 1fr}body.short .ldm canvas{width:120px;height:120px}body.short .ldm{flex-direction:row;padding:10px}body.short .ldn{font-size:20px}body.short .pf{padding:6px 12px}
-#menu{overflow-y:auto;-webkit-overflow-scrolling:touch}#menu #mi{margin:auto 0}body.short #menu.sub #mtt h1{font-size:20px}body.short #menu #mi{gap:6px;padding:6px 0}body.short .rlog{height:40px}
+#menu{overflow-y:auto;-webkit-overflow-scrolling:touch}#menu #mi{margin:auto}body.short #menu.sub #mtt h1{font-size:20px}body.short #menu #mi{gap:6px;padding:6px 0}body.short .rlog{height:40px}
 </style></head><body><div id="stage">
 <canvas id="g"></canvas><div id="vg"></div><button id="iw">일꾼 찾기 (F1)</button>
 <div id="tb"><button id="bPause" class="tb2 tonly">⏸ 정지</button><button id="bBox" class="tb2 tonly">▭ 박스선택</button><button id="bShift" class="tb2 tonly">⇧ 명령예약</button><button id="bDesel" class="tb2 tonly">✕ 선택해제</button><span id="gb"></span><button id="bSave" class="tb2">부대 지정</button><button id="bMMc" class="tb2">미니맵 명령</button><button id="bFs2" class="tb2 fsb">⛶ 전체화면</button></div>
@@ -824,6 +824,7 @@ function iconOld(k){const cn=document.createElement('canvas');cn.width=cn.height
  else if(k=='cs'){P('#e33',20,6,44,6,58,20,58,44,44,58,20,58,6,44,6,20);R2(18,18,28,28,3,'#fff')}
  else if(k=='ch'){R2(12,10,40,46,10,'#fd4');R2(19,17,26,32,7,'#3a3208')}
  else if(k=='ca'){x.strokeStyle='#f44';x.lineWidth=4;x.beginPath();x.arc(32,32,16,0,7);x.stroke();L('#f44',4,32,4,32,20,32,44,32,60,4,32,20,32,44,32,60,32)}
+ else if(k=='cf'){x.strokeStyle='#fb2';x.lineWidth=4;x.beginPath();x.arc(32,24,11,0,7);x.stroke();C(32,24,5,'#f33');L('#fb2',4,6,60,24,32);L('#fb2',4,32,60,32,38);L('#fb2',4,58,60,40,32);P('#fb2',32,52,26,60,38,60)}
  else if(k=='cp'){P('#4f8',6,22,26,22,26,12,40,26,26,40,26,30,6,30);P('#4f8',58,42,38,42,38,52,24,38,38,24,38,34,58,34)}
  else if(k=='cr'){L('#cfd6dd',9,14,50,42,22);C(46,18,11,'#cfd6dd');C(49,15,5,'#0a1520')}
  else if(k=='cb'){L('#b5651d',8,14,50,40,24);R2(32,10,24,14,3,'#9aa4ad')}
@@ -860,7 +861,7 @@ function hud(){const own=sel.filter(e=>e.t==0),[u,cp]=supply(0),K=RC[race[0]],wk
   if(own.some(e=>e.k=='marine'))bt(5,'t','스팀팩','-10 HP',up[0].stim==1,'stim');
   if(own.some(e=>e.k=='hydra'))bt(5,'l','러커 변태',cs(50,100),up[0].lurk==1&&m>=50&&g>=100,'lurk');
   if(own.some(e=>S[e.k].sgRng!==undefined)){bt(6,'e',zr?'잠복':'시즈 모드','',1,'sg');bt(7,'d',zr?'잠복 해제':'탱크 모드','',1,'tm')}else if(own.some(e=>e.k=='scv'))bt(wo?3:6,'r','수리','',1,'cr');
-  if(wkS)bt(wo?6:8,'b','건설','',1,'cb');if(!wo&&own.some(e=>S[e.k].dmg)){const fi=[5,6,7,8].find(i=>!sl[i]);if(fi!==undefined)bt(fi,'f','점사 (F)','',1,'ca')}
+  if(wkS)bt(wo?6:8,'b','건설','',1,'cb');if(!wo&&own.some(e=>S[e.k].dmg)){const fi=[5,6,7,8].find(i=>!sl[i]);if(fi!==undefined)bt(fi,'f','점사 (F)','',1,'cf')}
   if(own.some(e=>S[e.k].w&&!e.done&&e.k!='geo')){const fi=[8,7,6,5].find(i=>!sl[i]);if(fi!==undefined)bt(fi,'x','건설 취소','75% 환불',1,'cx')}}
  else{let i=0;const seenK=new Set();own.filter(e=>e.done&&!e.lift).forEach(b=>{(TR[b.k]||[]).forEach(([key,uk])=>{if(seenK.has(key))return;seenK.add(key);const s=S[uk],zl=zr&&HALL[b.k];bt(i++,key,NM[uk],cs(s.cost,s.gas),m>=s.cost&&g>=(s.gas||0)&&(!s.req||has(s.req))&&(!zl||b.lv>0),uk)});
    (RS[b.k]||[]).forEach(([key,uk])=>{if(seenK.has(key))return;seenK.add(key);const s=UP[uk],lv=s.lv?(up[0][uk]||0):0,cm=s.lv?s.c[Math.min(2,lv)]:s.m,cg=s.lv?cm:s.g,dn2=s.lv?(lv>=3||up[0][uk+'p']):up[0][uk];bt(i++,key,s.n+(s.lv?' '+(lv+1)+'단계':'')+' 연구',cs(cm,cg),!dn2&&m>=cm&&g>=cg&&(!s.req||has(s.req))&&!(s.lv&&zr&&lv>=1&&!has('lair')),uk)})});
