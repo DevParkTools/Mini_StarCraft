@@ -1048,7 +1048,7 @@ function hud(){const own=sel.filter(e=>e.t==0),[u,cp]=supply(0),K=RC[race[0]],wk
   if(own.some(e=>e.k=='muta')){bt(5,'g','가디언 변태',cs(50,100),has('spire')&&m>=50&&g>=100,'guardian');bt(6,'d','디바우러 변태',cs(150,50),has('spire')&&m>=150&&g>=50,'devourer')}
   if(own.some(e=>e.k=='hydra'))bt(5,'l','러커 변태',cs(50,100),up[0].lurk==1&&m>=50&&g>=100,'lurk');
   if(own.some(e=>S[e.k].sgRng!==undefined)){own.some(e=>S[e.k].sgRng!==undefined&&e.sg==1)?bt(6,zr?'u':'o',zr?'잠복 해제':'탱크 모드','',1,'tm'):bt(6,zr?'u':'o',zr?'잠복':'시즈 모드','',1,'sg')}else if(own.some(e=>e.k=='scv'))bt(wo?3:6,'r','수리','',1,'cr');
-  if(wo){bt(4,'g','채취','',1,'gather');bt(5,'c','자원 반납','',un.some(e=>e.o.carry>0||e.cg>0),'ret')}
+  if(wo){bt(4,'g','채취','',1,'gather');bt(5,'c','자원 반납','',own.some(e=>e.o.carry>0||e.cg>0),'ret')}
   if(wkS){bt(wo?6:8,'b','기본 건물','',1,'cb');const fv=[7,6,5].find(i=>!sl[i]);if(fv!==undefined)bt(fv,'v','고급 건물','',1,'cb')}
   if(own.some(e=>S[e.k].w&&!e.done&&e.k!='geo')){const fi=[8,7,6,5].find(i=>!sl[i]);if(fi!==undefined)bt(fi,'x','건설 취소','75% 환불',1,'cx')}}
  else{let i=0;const seenK=new Set();own.filter(e=>e.done&&!e.lift).forEach(b=>{(zr&&HALL[b.k]&&!LM()?[]:(TR[b.k]||[])).forEach(([key,uk])=>{if(seenK.has(key))return;seenK.add(key);const s=S[uk],zl=zr&&HALL[b.k];bt(i++,key,NM[uk],cs(s.cost,s.gas),m>=s.cost&&g>=(s.gas||0)&&(!s.req||has(s.req))&&(!zl||b.lv>0)&&b.q.length<(zl?3:5)&&u+su(s)*(s.n||1)<=cp&&!(S[b.k].pw&&!powered(b.t,b.x,b.y)),uk)});
@@ -1486,7 +1486,7 @@ const MODEH={land:'착륙할 위치를 클릭 (우클릭/Esc 취소)',place:'건
 let ROT=0,rotWant=0;const PX=e=>ROT?innerHeight-e.clientY:e.clientX,PY=e=>ROT?e.clientX:e.clientY,rotBs=[];
 function toggleRot(){rotWant=rotWant?0:1;try{localStorage.setItem('mscr',rotWant)}catch(_){}onRes()}
 let last=0,hT=0;
-function loop(t){if(!started){requestAnimationFrame(loop);return}const dt=Math.min(.05,(t-last)/1000||0);last=t;if(!over&&!paused)tick(dt);ft-=dt;alertT-=dt;scroll(dt);ghostTick();draw();drawMM();if(shk>.3){cv.style.transform='translate('+((Math.random()-.5)*shk)+'px,'+((Math.random()-.5)*shk)+'px)';shk*=.88}else if(shk){shk=0;cv.style.transform=''}if((hT-=dt)<=0){hT=.1;hud();uiTick()}requestAnimationFrame(loop)}
+function loop(t){requestAnimationFrame(loop);if(!started)return;const dt=Math.min(.05,(t-last)/1000||0);last=t;if(!over&&!paused)tick(dt);ft-=dt;alertT-=dt;scroll(dt);ghostTick();draw();drawMM();if(shk>.3){cv.style.transform='translate('+((Math.random()-.5)*shk)+'px,'+((Math.random()-.5)*shk)+'px)';shk*=.88}else if(shk){shk=0;cv.style.transform=''}if((hT-=dt)<=0){hT=.1;hud();uiTick()}}
 let cwp=150;
 let CW=0,CH=0,BS=1,SSC=1;
 function onRes(){ROT=rotWant&&innerHeight>innerWidth?1:0;const w=ROT?innerHeight:innerWidth,h=ROT?innerWidth:innerHeight,pt=h>w&&(TCH||w<700),st=$('stage').style,rd=innerHeight>innerWidth?'':'none';st.width=w+'px';st.height=h+'px';st.transform=ROT?'translateY('+innerHeight+'px) rotate(-90deg)':'none';for(let i=0;i<rotBs.length;i++)rotBs[i].style.display=rd;document.body.classList.toggle('port',pt);document.body.classList.toggle('short',w>h&&h<560);cwp=Math.min(150,Math.round(w*.385)),HHpx=pt?cwp+16+(h>=720?34:h>=600?28:10):(TCH||w<820)?Math.max(126,Math.min(170,h*.36)):150;document.documentElement.style.setProperty('--hh',HHpx+'px');document.documentElement.style.setProperty('--cw',cwp+'px');
